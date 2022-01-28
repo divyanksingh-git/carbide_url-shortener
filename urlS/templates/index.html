@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+      <title>UrlS</title>
+   </head>
+   <body><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>      
+	 <nav class="navbar navbar-dark bg-dark">
+		 <h1 class="text-white"> URL Shortener Application</h1>
+	 </nav><br><br>
+	 <div class="parent container d-flex justify-content-center align-items-center h-100">
+  	<div class="child">
+
+         <form method="POST">{% csrf_token %}
+	 <input type="url" name="url" placeholder="Enter the link here" required>
+            <button class="btn btn-dark">Shorten URL</button>
+	 </form><br>
+      {% if short_url %}
+      <div>
+         <h3>Your shortened URL </h3>
+         <div>
+            <input type="url" id="short_url" value={{short_url}} disabled> <button name="short-url" class="btn btn-dark" onclick="CopyFunction()">Copy URL</button> <small id="copied" class="px-5"></small>
+         </div>
+         <br>
+	 <span style="color : #085ac8; display:inline-block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis; max-width: 35ch;"><b style="color : #212529">Long URL: </b> <a href="{{long_url}}">{{long_url}}</a></span>
+      </div>
+      {%endif%}
+      </div></div>
+      
+      <script>
+	      function CopyFunction() {
+				    var copyText = document.getElementById("short_url");
+				    copyText.select();
+				    copyText.setSelectionRange(0, 99999);
+				    navigator.clipboard.writeText(copyText.value);
+				    alert("Copied the text: " + copyText.value);
+			    } 
+      </script>
+   </body>
+</html>
